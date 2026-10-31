@@ -5,6 +5,9 @@ set -euo pipefail
 BUNDLE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$HOME/dotfiles"
 NVIM_DIR="$HOME/.config/nvim"
+DSH_VERSION="0.2.1-rc.2"
+DSH_TUI_VERSION="0.16.1"
+DSH_TUI_PROFILE_VERSION="0.17.0"
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 
@@ -125,16 +128,19 @@ EOF
 setup_js_runtimes() {
   log "Installing node and bun with mise"
   mise use --global node@24 bun@latest
-  export PATH="$HOME/.local/share/mise/shims:$HOME/.bun/bin:$PATH"
+  export PATH="$HOME/.local/share/mise/shims:$PATH"
 }
 
 setup_dsh() {
-  local profile_dir="$HOME/.dsh/profiles/cctui"
-  log "Installing DeepSeek harness (dsh) and the cctui profile"
-  bun add --global @deepseek-ai/dsh
-  if [[ ! -f "$profile_dir/package.json" ]]; then
-    mkdir -p "$profile_dir"
-    cp -R "$DOTFILES_DIR/dsh/profiles/cctui/." "$profile_dir/"
+  local cctui_dir="$HOME/.dsh/profiles/cctui"
+  log "Installing DeepSeek harness (dsh), dsh-tui (dst) and the dsh-tui and cctui profiles"
+  mise use --global "npm:@deepseek-ai/dsh@$DSH_VERSION" "npm:@deepseek-harness-tui/dsh-tui@$DSH_TUI_VERSION"
+  if [[ ! -f "$HOME/.dsh/profiles/dsh-tui/package.json" ]]; then
+    dsh plugin --profile dsh-tui -- add "@deepseek-harness-tui/dsh-tui@$DSH_TUI_PROFILE_VERSION"
+  fi
+  if [[ ! -f "$cctui_dir/package.json" ]]; then
+    mkdir -p "$cctui_dir"
+    cp -R "$DOTFILES_DIR/dsh/profiles/cctui/." "$cctui_dir/"
   fi
   dsh plugin --profile cctui -- install --frozen-lockfile
 }
@@ -174,7 +180,7 @@ main() {
   setup_tmux_plugins
   setup_herdr_plugins
   setup_raycast
-  log "Done. Open a new terminal to load zsh, open Karabiner-Elements once to grant its permissions, run 'bw login' for the Bitwarden CLI, and set DEEPSEEK_API_KEY (e.g. in ~/.zshrc.local) before 'dsh --profile cctui'."
+  log "Done. Open a new terminal to load zsh, open Karabiner-Elements once to grant its permissions, run 'bw login' for the Bitwarden CLI, and set DEEPSEEK_API_KEY (e.g. in ~/.zshrc.local) before 'dst' or 'dsh --profile cctui'."
 }
 
 main "$@"

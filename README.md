@@ -35,7 +35,7 @@ Put your Raycast export (`*.rayconfig`) in `~/workspace/dev-setup/configs/raycas
 | Terminal | Rio, tmux (+ tpm plugins), herdr (+ herdr-plus, command-palette plugins) | dotfiles |
 | Shell | zsh config, starship, atuin, zoxide, fzf, direnv, forgit, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions, glow, coreutils, jq, qrencode | dotfiles |
 | Runtimes | mise, node 24 and bun (via mise), pnpm, uv | - |
-| DeepSeek | dsh (`@deepseek-ai/dsh`) and the `cctui` profile with dsh-tui | profile copied from `dotfiles/dsh/profiles/cctui` to `~/.dsh/profiles/cctui` |
+| DeepSeek | dsh (`@deepseek-ai/dsh`) and the dsh-tui launcher (`dsh-tui` / `dst`), both pinned with mise; the `dsh-tui` and `cctui` profiles | `dsh-tui` profile bootstrapped with `dsh plugin`; `cctui` copied from `dotfiles/dsh/profiles/cctui` to `~/.dsh/profiles/cctui` |
 | Apps | Raycast, Karabiner-Elements, Brave Browser | Raycast from `configs/raycast/*.rayconfig`; Karabiner via dotfiles |
 | Other | Bitwarden CLI, JetBrains Mono Nerd Font, ripgrep, fd, git, stow | - |
 
@@ -47,7 +47,7 @@ Existing non-symlinked config files (`.zshrc`, `.zshenv`, `.tmux.conf`, starship
 2. Open Karabiner-Elements once and grant Input Monitoring and the driver extension.
 3. Enter the Raycast export password when the import opens, and grant Raycast Accessibility access for window management.
 4. Run `bw login` to sign in to the Bitwarden CLI. Add the Bitwarden extension to Brave from the Chrome Web Store.
-5. Put `export DEEPSEEK_API_KEY=...` in `~/.zshrc.local` (never in dotfiles, the repo is public), then run `dsh --profile cctui`.
+5. Put `export DEEPSEEK_API_KEY=...` in `~/.zshrc.local` (never in dotfiles, the repo is public), then run `dst` or `dsh --profile cctui`. `dsh-tui --version` should print launcher 0.16.1 and profile 0.17.0. The dsh-tui settings (`~/.dsh-tui/*.json`), agent presets (`~/.dsh/.agent-presets/`) and MCP rows (`~/.dsh/profiles/dsh-tui/cordis.patch.yml`) are per machine and are not copied.
 
 ## Folder contents
 
