@@ -39,7 +39,7 @@ Put your Raycast export (`*.rayconfig`) in `~/workspace/dev-setup/configs/raycas
 | Apps | Raycast, Karabiner-Elements, Brave Browser | Raycast from `configs/raycast/*.rayconfig`; Karabiner via dotfiles |
 | Other | Bitwarden CLI, JetBrains Mono Nerd Font, ripgrep, fd, git, stow | - |
 
-Existing non-symlinked config files (`.zshrc`, `.zshenv`, `.tmux.conf`, starship, atuin, karabiner) are renamed to `*.bak.<timestamp>` before linking.
+Existing non-symlinked config files (`.zshrc`, `.zshenv`, `.tmux.conf`, starship, atuin, karabiner, rio) are renamed to `*.bak.<timestamp>` before linking.
 
 ## After the script finishes
 

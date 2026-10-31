@@ -102,7 +102,7 @@ setup_dotfiles() {
   clone_or_pull https://github.com/shaunwen/dotfiles.git "$DOTFILES_DIR"
   git -C "$DOTFILES_DIR" remote set-url --push origin git@github.com:shaunwen/dotfiles.git
   mkdir -p "$HOME/.config/"{neovide,herdr,rio,atuin,glow,karabiner}
-  backup_unmanaged .zshrc .zshenv .tmux.conf .config/starship.toml .config/atuin/config.toml .config/karabiner/karabiner.json
+  backup_unmanaged .zshrc .zshenv .tmux.conf .config/starship.toml .config/atuin/config.toml .config/karabiner/karabiner.json .config/rio/config.toml
   for pkg in zsh starship atuin glow tmux neovide herdr rio karabiner; do
     stow --dir="$DOTFILES_DIR" --target="$HOME" --restow "$pkg"
   done
